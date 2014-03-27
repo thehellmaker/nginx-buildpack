@@ -2,6 +2,9 @@
 
 set -e
 
+ls $1
+ls $1/bin
+
 echo "Creating bin directory under the application"
 mkdir -p "$1/bin/"
 echo "Successfully created the bin directory under application"
