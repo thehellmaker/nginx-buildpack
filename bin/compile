@@ -2,7 +2,10 @@
 
 set -e
 
+echo "Creating bin directory under the application"
 mkdir -p "$1/bin/"
+echo "Successfully created the bin directory under application"
+ls bin/
 cp bin/nginx "$1/bin/"
 nginx_version=$(./bin/nginx -V 2>&1 | head -1 | awk '{ print $NF }')
 echo "-----> nginx-buildpack: Installed ${nginx_version} to app/bin"
