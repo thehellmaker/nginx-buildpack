@@ -2,23 +2,9 @@
 
 set -e
 
-ls $1
-ls $1/bin
-
-echo "Creating bin directory under the application"
-mkdir -p "$1/bin/"
-echo "Successfully created the bin directory under application"
-ls bin/
-cp bin/nginx "$1/bin/"
-nginx_version=$(./bin/nginx -V 2>&1 | head -1 | awk '{ print $NF }')
+nginx_version=$($1/bin/nginx -V 2>&1 | head -1 | awk '{ print $NF }')
 echo "-----> nginx-buildpack: Installed ${nginx_version} to app/bin"
-cp bin/start-nginx "$1/bin/"
 echo '-----> nginx-buildpack: Added start-nginx to app/bin'
-
-mkdir -p "$1/config"
-
-cp config/mime.types "$1/config/"
-echo '-----> nginx-buildpack: Default mime.types copied to app/config/'
 
 if [[ ! -f $1/config/nginx.conf.erb ]]; then
 	cp config/nginx.conf.erb "$1/config/"
